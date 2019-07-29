@@ -14,4 +14,6 @@ Compared the various existing approaches to time series data analysis by using p
 execute the files stock_conv1d.ipynb, stock_dilatedconv+lstm.ipynb, stock_lstm+conv1d.ipynb, stock_nn.ipynb, stock_rnn_lstm.ipynb and compare the results
 =======
 # MSc-dissertation
->>>>>>> edafa0f35beaec0d7c7567d6246a9c7807478200
+### To run
+stock_conditional_TS.ipynb
+
