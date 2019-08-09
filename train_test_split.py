@@ -112,10 +112,10 @@ class utility_fun():
         time_steps = self.time_interval
         
         
-        trainData = trainData.view(lens,-1,time_steps,3)
+        trainData = trainData.view(lens,-1,time_steps,4)
         testData = testData.view(lens,-1)
-        validateData = validateData.view(validateData.shape[0],-1,time_steps,3)
-        # print(trainData.shape,testData.shape,validateData.shape)
+        validateData = validateData.view(validateData.shape[0],-1,time_steps,4)
+#         print(trainData.shape,testData.shape,validateData.shape)
         
         train = TensorDataset(trainData.view(lens, -1).float(), testData.view(-1).float())
         trainloader = DataLoader(train, batch_size=1, shuffle=True)
