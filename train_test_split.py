@@ -118,7 +118,7 @@ class utility_fun():
 #         print(trainData.shape,testData.shape,validateData.shape)
         
         train = TensorDataset(trainData.view(lens, -1).float(), testData.view(-1).float())
-        trainloader = DataLoader(train, batch_size=128, shuffle=True)
+        trainloader = DataLoader(train, batch_size=1, shuffle=True)
         
         return trainloader, validateData, trainData, testData
 
