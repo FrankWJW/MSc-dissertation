@@ -45,7 +45,7 @@ import torchvision.transforms as transforms
 class utility_fun():
     
     
-    def __init__(self, data, len_of_trainset = 2412, time_interval = 100):
+    def __init__(self, data, len_of_trainset = 2412, time_interval = 100, batch_size = 32):
         # print('start')
         self.X = data[0]
         self.y = data[1]
@@ -56,6 +56,7 @@ class utility_fun():
         self.y_train = None
         self.X_test = None
         self.y_test = None
+        self.batch_size = batch_size
     def norm(self):
 
         len_of_trainset = self.len_of_trainset
@@ -118,7 +119,7 @@ class utility_fun():
 #         print(trainData.shape,testData.shape,validateData.shape)
         
         train = TensorDataset(trainData.view(lens, -1).float(), testData.view(-1).float())
-        trainloader = DataLoader(train, batch_size=1, shuffle=True)
+        trainloader = DataLoader(train, batch_size=self.batch_size, shuffle=True)
         
         return trainloader, validateData, trainData, testData
 
