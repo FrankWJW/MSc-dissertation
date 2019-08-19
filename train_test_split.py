@@ -103,7 +103,7 @@ class utility_fun():
 #         print (X_test.shape, y_test.shape)
 
 
-    def build_dataloader_mlp(self):
+    def build_dataloader(self, flag = 'mlp'):
         #convert to torch
         trainData = torch.from_numpy(self.X_train)
         testData = torch.from_numpy(self.y_train)
@@ -119,10 +119,17 @@ class utility_fun():
         validateData_sample = validateData_sample.view(validateData_sample.shape[0],-1,time_steps,11)
 #         print(trainData.shape,testData.shape,validateData.shape)
         
-        train = TensorDataset(trainData.view(lens, -1).float(), testData.view(lens, -1).float())
+        # if using mlp
+        if flag == 'mlp' or 'lstm':
+            train = TensorDataset(trainData.view(lens, -1).float(), testData.view(lens, -1).float())
+            len_test = validateData_sample.shape[0]
+            test = TensorDataset(validateData_sample.view(len_test, -1).float(), validateData_target.view(len_test, -1).float())
         
-        len_test = validateData_sample.shape[0]
-        test = TensorDataset(validateData_sample.view(len_test, -1).float(), validateData_target.view(len_test, -1).float())
+        # if using conv 1d
+        if flag == '1dconv':
+            train = TensorDataset(trainData, testData)
+            len_test = validateData_sample.shape[0]
+            test = TensorDataset(validateData_sample.float(), validateData_target.view(len_test, -1).float())
         
         trainloader = DataLoader(train, batch_size=self.batch_size, shuffle=True)
         testloader = DataLoader(test, batch_size=self.batch_size, shuffle=True)
