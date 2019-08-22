@@ -57,7 +57,7 @@ class utility_fun():
         self.X_test = None
         self.y_test = None
         self.batch_size = batch_size
-    def norm(self):
+    def norm(self, flag):
 
         len_of_trainset = self.len_of_trainset
 
@@ -69,9 +69,17 @@ class utility_fun():
         
         X1= (X1- np.min(X1,axis=0))/(np.max(X1, axis=0)-np.min(X1,axis=0))
         X2= (X2- np.min(X2,axis=0))/(np.max(X2, axis=0)-np.min(X2,axis=0))
-
+        
+        if flag is 'classifier':
+            print(flag)
+        if flag is 'regressor':
+            print(flag)
+            y1= (y1- min(y1))/(max(y1)-min(y1))
+            y2= (y2- min(y2))/(max(y2)-min(y2))
+            self.y = np.concatenate((y1,y2))
+            
         self.X = np.concatenate((X1,X2) , axis = 0)
-        self.y = np.concatenate((y1,y2) , axis = 0)
+        
 #         print(self.X.shape, self.y.shape)
         
     def sepera_time_step(self):
